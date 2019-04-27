@@ -1,0 +1,50 @@
+﻿@model QualitySouvenirs.Models.Souvenir
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductView</title>
+</head>
+<body>
+    <style>
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+        #myForm {
+            position: absolute;
+            top: 100px;
+            left: 500px;
+        }
+
+        input{
+            color:black;
+        }
+    </style>
+
+    <form id="myForm">
+        <h3>@Html.DisplayFor(model => model.Name)</h3>
+        <br />
+        <img src="~/@Html.DisplayFor(model => model.ImagePath)" />
+        <br />
+        <br />
+        <p>Souvenir Name: @Html.DisplayFor(model => model.Name)</p>
+        <p>Souvenir Description: @Html.DisplayFor(model => model.Description)</p>
+        <p>Souvenir Price: @Html.DisplayFor(model => model.Price)</p>
+        <br />
+        <br />
+        <input type="button" value="Add To Cart" />
+
+    </form>
+
+</body>
+</html>
+

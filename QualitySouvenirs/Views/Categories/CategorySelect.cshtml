@@ -1,0 +1,53 @@
+﻿@model IEnumerable<QualitySouvenirs.Models.Souvenir>
+
+@{
+    ViewData["Title"] = "CategorySelect";
+}
+
+<style>
+
+    #CatList {
+        position: absolute;
+        top: 100px;
+        left: 150px;
+    }
+
+    td {q
+        padding: 5px;
+    }
+
+    img {
+        width: 300px;
+        height: 300px;
+    }
+
+</style>
+
+<body>
+
+    <div id="CatList">
+        <table>
+            <tr>
+                @foreach (var item in Model)
+                {
+                    <td>
+                        <a asp-controller="Souvenir" asp-action="CategoryView" asp-route-id="@item.CategoryID" style="color:white;">
+                            @if (item.SouvenirID == 1 || item.SouvenirID == 5 || item.SouvenirID == 11)
+                            {
+                                <img src="~/@Html.DisplayFor(modelItem => item.ImagePath)" />
+                                <br />
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Category.Name)
+                            }
+                        </a>
+                    </td>
+                }
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+
+
+

@@ -1,0 +1,115 @@
+﻿@model PaginatedList<QualitySouvenirs.Models.Souvenir>
+
+@{
+    ViewData["Title"] = "CategoryView";
+}
+
+<body>
+    <style>
+
+        #SouvenirList {
+            position: absolute;
+            top: 100px;
+            left: 300px;
+        }
+
+        table {
+            padding: 15px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        a {
+            color: white;
+        }
+
+        form {
+            position: absolute;
+            left: 800px;
+            top: 100px;
+        }
+
+        input {
+            color: black;
+        }
+
+
+        #prev {
+            position: absolute;
+            left: 300px;
+            top: 500px;
+        }
+
+        #next {
+            position: absolute;
+            left: 500px;
+            top: 500px;
+        }
+    </style>
+    <form asp-action="CategoryView" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name or price: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="CategoryView">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+    <div id="SouvenirList">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="CategoryView" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Souvenir Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    </th>
+                    <th>
+                        <a asp-action="CategoryView" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Souvenir Price</a>
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    </th>
+                    <th>
+                        Souvenir Image
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a asp-action="ProductView" asp-route-id="@item.SouvenirID"><br />@Html.DisplayFor(modelItem => item.Name)</a></td>
+                        <td><a asp-action="ProductView" asp-route-id="@item.SouvenirID"><br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$@Html.DisplayFor(modelItem => item.Price)</a></td>
+                        <td><a asp-action="ProductView" asp-route-id="@item.SouvenirID"><br /><img src="~/@Html.DisplayFor(modelItem => item.ImagePath)" /></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a id="prev" asp-action="CategoryView"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a id="next" asp-action="CategoryView"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+
+
+
+</body>
+

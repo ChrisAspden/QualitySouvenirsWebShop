@@ -1,0 +1,20 @@
+﻿@model QualitySouvenirs.Models.Login.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(c => c.Email)
+    @Html.TextBoxFor(c => c.Password)
+    <input type="submit" value="Login" />
+}
+
+
+
+
+
